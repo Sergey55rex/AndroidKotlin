@@ -13,6 +13,7 @@
     <string name="error_empty_content">Контент не может быть пустым</string>
     <string name="descripion_post_author_avatar" />
     <string name="descripion_post_menu" />
+    <string name="chooser_share_post" />
     <string name="empty_post_error">Content can\'t be empty</string>
     <string name="add_post">Add post</string>
 </resources>

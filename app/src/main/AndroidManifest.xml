@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nmedia">
-        <activity android:name=".activity.Video"></activity>
+
         <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,9 +32,7 @@
         <activity
             android:name=".activity.NewPostActivity"
             android:windowSoftInputMode="stateVisible" />
-        <activity
-            android:name=".activity.СhangePostActivity"
-            android:windowSoftInputMode="stateVisible" />
+
     </application>
 
 </manifest>
