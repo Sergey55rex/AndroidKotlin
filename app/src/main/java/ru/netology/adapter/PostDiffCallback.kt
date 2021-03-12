@@ -1,7 +1,7 @@
 package ru.netology.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.netology.Post
+import ru.netology.dto.Post
 
 class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
     override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {

@@ -7,13 +7,13 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
-import ru.netology.Post
+import ru.netology.dto.Post
 import ru.netology.R
 import ru.netology.adapter.OnListenerPress
 import ru.netology.adapter.PostAdapter
 import ru.netology.databinding.ActivityMainBinding
 import ru.netology.vievmodel.PostViewModel
-//   Этот класс удален
+
 class MainActivity : AppCompatActivity() {
     private val newPostRequestCode = 1
     val viewModel: PostViewModel by viewModels()
@@ -22,26 +22,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // run {
-//            val preferences = getPreferences(Context.MODE_PRIVATE)
-//            preferences.edit().apply {
-//                putString("key", "value") // putX
-//                commit() // commit - синхронно, apply - асинхронно
-//            }
-//        }
-//
-//        run {
-//            getPreferences(Context.MODE_PRIVATE)
-//                .getString("key", "no value")?.let {
-//                    Snackbar.make(binding.root, it, BaseTransientBottomBar.LENGTH_INDEFINITE)
-//                        .show()
-//                }
-//        }
-
-
-
-
-
 
         val adapter = PostAdapter(object : OnListenerPress {
             override fun onEdit(post: Post) {

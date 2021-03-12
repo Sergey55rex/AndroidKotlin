@@ -4,7 +4,7 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
-import ru.netology.Post
+import ru.netology.dto.Post
 import ru.netology.R
 import ru.netology.databinding.CardPostBinding
 import ru.netology.utils.Calculator.calculator

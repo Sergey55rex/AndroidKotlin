@@ -1,4 +1,4 @@
-package ru.netology
+package ru.netology.dto
 
 import android.net.wifi.aware.PublishConfig
 

@@ -2,9 +2,8 @@ package ru.netology.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import ru.netology.Post
+import ru.netology.dto.Post
 import ru.netology.databinding.CardPostBinding
 
 class PostAdapter(

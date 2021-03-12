@@ -2,7 +2,7 @@ package ru.netology.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import ru.netology.Post
+import ru.netology.dto.Post
 
 class PostRepositoryInMemoryImpl : PostRepository{
     private var nextId = 1L

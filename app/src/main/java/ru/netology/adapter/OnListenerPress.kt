@@ -1,6 +1,6 @@
 package ru.netology.adapter
 
-import ru.netology.Post
+import ru.netology.dto.Post
 
 interface OnListenerPress {
     fun onLikeListener(post: Post)
