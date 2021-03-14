@@ -1,27 +1,37 @@
 package ru.netology.activity
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isGone
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import ru.netology.dto.Post
 import ru.netology.R
+import ru.netology.activity.NewPostFragment.Companion.textArg
 import ru.netology.adapter.OnListenerPress
 import ru.netology.adapter.PostAdapter
-import ru.netology.databinding.ActivityMainBinding
+import ru.netology.databinding.FragmentFeedBinding
 import ru.netology.vievmodel.PostViewModel
 
-class MainActivity : AppCompatActivity() {
-    private val newPostRequestCode = 1
-    val viewModel: PostViewModel by viewModels()
+class FeedFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private val viewModel: PostViewModel by viewModels(
+        ownerProducer = ::requireParentFragment
+    )
+
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val binding = FragmentFeedBinding.inflate(inflater,container, false)
+
 
         val adapter = PostAdapter(object : OnListenerPress {
             override fun onEdit(post: Post) {
@@ -63,41 +73,28 @@ class MainActivity : AppCompatActivity() {
         binding.cancellation.isGone = true
 
         binding.list.adapter = adapter
-        viewModel.data.observe(this, { posts ->
+        viewModel.data.observe(viewLifecycleOwner, { posts ->
             adapter.submitList(posts)
         })
 
-        viewModel.edited.observe(this, { post ->
+        viewModel.edited.observe(viewLifecycleOwner, { post ->
             if (post.id == 0L) {
                 return@observe
             }
             with(binding.content) {
-                val intent = Intent(this@MainActivity, RedactorActivity::class.java)
-                val count = post.content
-                intent.putExtra("text", count.toString())
-                startActivityForResult(intent, newPostRequestCode)
+                val text: String = post.content
+                val bundle = Bundle().apply {
+                    textArg = text
+                }
+                findNavController().navigate(R.id.action_feedFragment_to_redactorFragment, bundle)
+
             }
         })
 
         binding.fab.setOnClickListener {
-            val intent = Intent(this@MainActivity, NewPostActivity::class.java)
-            startActivityForResult(intent, newPostRequestCode)
+           findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
         }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (requestCode) {
-            newPostRequestCode -> {
-                if (resultCode != Activity.RESULT_OK) {
-                    return
-                }
-                data?.getStringExtra(Intent.EXTRA_TEXT)?.let {
-                    viewModel.changeContent(it)
-                    viewModel.save()
-                }
-            }
-        }
+        return binding.root
     }
 }
 
